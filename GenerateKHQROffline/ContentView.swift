@@ -11,7 +11,7 @@ import CoreImage.CIFilterBuiltins
 import BakongKHQR
 
 struct ContentView: View {
-
+    
     // MARK: - Input fields
     @State private var storeName: String = "Coffee Shop"
     @State private var accountInfo: String = "85512233455"
