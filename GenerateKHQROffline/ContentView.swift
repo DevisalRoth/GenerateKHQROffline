@@ -13,8 +13,8 @@ import BakongKHQR
 struct ContentView: View {
     
     // MARK: - Input fields
-    @State private var storeName: String = "Coffee Shop"
-    @State private var accountInfo: String = "85512233455"
+    @State private var storeName: String = "CHOU VISALROTH"
+    @State private var accountInfo: String = "069334425"
     @State private var amountText: String = ""
 
     // MARK: - Output
@@ -141,14 +141,28 @@ struct ContentView: View {
 
         // ✅ expiration timestamp required by SDK (13-digit millis)
         let expireTime = expirationTimestampMillis(minutes: 10)
+//        let merchentInfo = MerchantInfo()
         
+        
+        //ABA BANK
+//        let info = IndividualInfo(
+//            accountId: "abaakhppxxx@abaa",
+//            merchantName: storeName,
+//            accountInformation: accountInfo,
+//            acquiringBank: "ABA Bank",
+//            currency: .Usd,
+//            amount: amount
+//        )
+        
+        
+        // PPCB
         let info = IndividualInfo(
-            accountId: "khqr@ababank",
-            merchantName: storeName,
+            accountId         : "khqr@ppcb",
+            merchantName      : storeName,
             accountInformation: accountInfo,
-            acquiringBank: "ABA Bank",
-            currency: .Usd,
-            amount: amount
+            acquiringBank     : "Phnom Penh Commercial Bank",
+            currency          : .Usd,
+            amount            : amount
         )
 
         // ✅ Required by your SDK
@@ -156,6 +170,7 @@ struct ContentView: View {
 
         let khqrResponse = BakongKHQR.generateIndividual(info!)
 
+        print("khqr Response: \(khqrResponse.status?.code)")
         if khqrResponse.status?.code == 0 {
             let khqrData = khqrResponse.data as? KHQRData
             khqrString = khqrData?.qr ?? ""
